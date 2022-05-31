@@ -3,6 +3,8 @@ import { Msg } from './Msg';
 import { Welcome } from './Welcome';
 import { AddColor } from './AddColor';
 import { Counter } from './Counter'
+import { useState } from 'react'
+import { Routes, Route, Link } from "react-router-dom";
 
 const INTIAL_MOVIE_LIST =[
     {
@@ -105,7 +107,7 @@ const INTIAL_MOVIE_LIST =[
 function App() {
 
   // const names = ["Sanjay", "Aniket", "Anjali"];
-  const movieList = INTIAL_MOVIE_LIST;
+  // const movieList = INTIAL_MOVIE_LIST;
   // const users = [
   //   {
   //     name: "Sanjay",
@@ -137,19 +139,42 @@ function App() {
       {/* <Counter /> */}
       {/* <AddColor /> */}
       {/* <Movie /> */}
-      <div className="movie-list">
-      {movieList.map((mv)=> (
-        <Movie movie={mv}/>
-      ))}
-      </div>
+      {/* <MovieList /> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movies" element={<MovieList />} />
+        <Route path="/color-game" element={<AddColor />} />
+
+      </Routes>
     </div>
   );
   // JSX Ends
 }
 
+function Home() {
+  return <h1>Welcome to Movie App 🙌🙌😍😍🤩🤩</h1>
+}
+
+function MovieList() {
+  const movieList = INTIAL_MOVIE_LIST;
+  return(
+    <div className="movie-list">
+      {movieList.map((mv, index)=> (
+        <Movie key={index} movie={mv}/>
+      ))}
+      </div>
+  )
+}
+
 function Movie({ movie }) {
   const style = {
     color: movie.rating > 8 ? "green" : "red",
+  }
+
+  const [show, setShow] = useState();
+
+  const summaryStyle = {
+    display : show ? "block" : "none",
   }
     // const movie = 
     //   {
@@ -170,8 +195,8 @@ function Movie({ movie }) {
     <h2 className="movie-name">{movie.name}</h2>
     <p style={style} className="movie-rating">⭐ {movie.rating}</p>
     </div>
-    <button>Toggle Description</button>
-    <p className="movie-summary">{movie.summary}</p>
+    <button onClick={()=> setShow(!show)}>Toggle Description</button>
+    <p style={summaryStyle} className="movie-summary">{movie.summary}</p>
     <Counter />
   </div>
   );
