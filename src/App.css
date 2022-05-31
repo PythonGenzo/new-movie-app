@@ -1,38 +1,75 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  font-family: sans-serif;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+  /* text-align: center; */
+}
+.profile-pic {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  /* object-fit: center; */
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+.btn-like,
+.btn-dislike {
+  font-size: 1.5rem;
 }
 
-.App-link {
-  color: #61dafb;
+.user-name {
+  font-size: 32px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.user-pic {
+  height: 12rem;
+  width: 12rem;
+  /* zoom  in */
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.movie-poster {
+  height: 640px;
+  width: 340px;
+  /* zoom  in */
+  object-fit: cover;
+}
+
+.movie-name {
+  font-size: 24px;
+  margin: 0;
+}
+
+.movie-specs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.movie-container {
+  /* background-color: orange; */
+  width: 340px;
+}
+
+/* RAM */
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+body {
+  margin: 24px;
 }
