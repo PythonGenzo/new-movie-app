@@ -1,54 +1,41 @@
-.App {
-  font-family: sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* text-align: center; */
+/* 1rem = 16px */
+
+/* :root {
+  /* 1rem = 10px */
+  /* font-size: 10px; */
+/* } */ 
+
+body {
+  font-family: Roboto;
 }
+
 .profile-pic {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
   border-radius: 50%;
-  height: 100px;
-  width: 100px;
-  /* object-fit: center; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.name {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding-bottom: 20px;
-}
+
+/* .App > div:nth-child(3) > .profile-pic {
+  border-radius: 0px;
+} */
+
 .btn-like,
 .btn-dislike {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
-.user-name {
-  font-size: 32px;
+.btn-like {
+  margin-right: 0.5rem;
 }
 
-.user-pic {
-  height: 12rem;
-  width: 12rem;
-  /* zoom  in */
-  object-fit: cover;
-  border-radius: 50%;
+.user-container {
+  padding: 2rem;
+  /* border-top: 5px solid orange; */
 }
 
-.movie-poster {
-  height: 640px;
-  width: 340px;
-  /* zoom  in */
-  object-fit: cover;
-}
-
-.movie-name {
-  font-size: 24px;
-  margin: 0;
+.add-color {
+  display: flex;
 }
 
 .movie-specs {
@@ -60,16 +47,58 @@
 .movie-container {
   /* background-color: orange; */
   width: 340px;
+
+  height: min-content;
 }
 
-/* RAM */
+.movie-poster {
+  width: 340px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.movie-name {
+  font-size: 24px;
+  margin: 0;
+}
+
+.movie-summary {
+  margin-top: 0;
+}
+
+.movie-rating {
+  font-size: 18px;
+}
+
 .movie-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 1rem;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 16px;
 }
 
-body {
-  margin: 24px;
+.not-found {
+  width: 100%;
+  max-height: 700px;
+  object-fit: contain;
+}
+
+.movie-detail-container {
+  max-width: 800px;
+}
+
+.add-movie-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.router-container {
+  padding: 24px 12px;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
