@@ -1,12 +1,25 @@
 import { useNavigate, useParams } from "react-router-dom";
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import { useEffect, useState} from 'react';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import { API } from "./global";
 
-export function MovieDetail({ movieList }) {
+export function MovieDetail() {
   const { id } = useParams();
-  const movie = movieList[id];
+  // const movie = movieList[id];
+  const [movie, setMovie] = useState({})
+  // const [movieList, setMovieList] = useState([]);
+
   // console.log(movie);
+
+  useEffect(() => {
+
+    fetch(`${API}/movies/${id}`)
+      .then((data) => data.json())
+      .then((mv) => setMovie(mv));
+    },[id])
+
   const navigate = useNavigate();
 
   const style = {

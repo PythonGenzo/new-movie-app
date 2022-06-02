@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,7 +13,9 @@ export function Counter() {
   const incrementLike = () => setLike(like + 1);
   const incrementDisLike = () => setDisLike(dislike + 1);
 
-
+  // useEffect(() => {
+  //   console.log("like is value", like);
+  // }, [like, dislike]);
 
   // let like =10;
   return (

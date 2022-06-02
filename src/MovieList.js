@@ -1,19 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Movie } from './Movie';
+// import { ApiTwoTone } from '@mui/icons-material';
+import { API } from './global';
 
-export function MovieList({ movieList, setMovieList }) {
+export function MovieList() {
   // const movieList = INTIAL_MOVIE_LIST;
+  const [movieList, setMovieList] = useState([]);
  
+  useEffect(() => {
+
+    fetch(`${API}/movies`)
+      .then((data) => data.json())
+      .then((movies) => setMovieList(movies));
+    },[])
 
   return (
     <div>
       
       <div className="movie-list">
-        {movieList.map((mv, index) => (
-          <Movie key={index} movie={mv} id={index} />
+        {movieList.map((mv) => (
+          <Movie key={mv.id} movie={mv} id={mv.id} />
         ))}
       </div>
     </div>
@@ -40,7 +49,7 @@ export function AddMovie({ movieList, setMovieList }) {
     setMovieList([...movieList, newMovie]);
   };
   return(
-    <div className="add=movie-form">
+    <div className="add-movie-form">
 
         <TextField
           onChange={(event) => setName(event.target.value)}
