@@ -15,10 +15,19 @@ export function MovieDetail() {
 
   useEffect(() => {
 
-    fetch(`${API}/movies/${id}`)
-      .then((data) => data.json())
-      .then((mv) => setMovie(mv));
-    },[id])
+    // fetch(`${API}/movies/${id}`)
+    //   .then((data) => data.json())
+    //   .then((mv) => setMovie(mv));
+
+      async function getMovie() {
+        const data = await  fetch(`${API}/movies/${id}`)
+        const mv = await data.json();
+        setMovie(mv)
+      }
+
+      getMovie()
+
+    },[id]);
 
   const navigate = useNavigate();
 
