@@ -1,13 +1,14 @@
 import './App.css';
-import { Welcome } from './Welcome';
+// import { Welcome } from './Welcome';
 import { AddColor } from './AddColor';
-import { useEffect, useState } from 'react'
-import { Routes, Route, Link, Navigate, useNavigate, useParams } 
+import { useState } from 'react'
+import { Routes, Route, Link, Navigate, useNavigate } 
 from "react-router-dom";
 import * as React from 'react';
 import { NotFound } from './NotFound';
 import { MovieDetail } from './MovieDetail';
-import { AddMovie, MovieList } from './MovieList';
+import { MovieList } from './MovieList';
+import { AddMovie } from "./AddMovie";
 import { UserList } from './UserList';
 import AppBar from '@mui/material/AppBar';
 // import Box from '@mui/material/Box';
@@ -20,8 +21,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
-import TextField from '@mui/material/TextField';
-import { API } from "./global";
+import { EditMovie } from './EditMovie';
+import { BasicForm } from './BasicForm';
 
 
 
@@ -182,7 +183,7 @@ function App() {
         <Toolbar>
           
           <Button color="inherit" 
-          onClick={()=> navigate("/home")}>Home</Button>
+          onClick={()=> navigate("/")}>Home</Button>
           <Button color="inherit" 
           onClick={()=> navigate("/movies")}>Movies</Button>
           <Button color="inherit" 
@@ -218,7 +219,7 @@ function App() {
       </nav> */}
       <div className="router-container">
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/movies" element={<MovieList />} />
         <Route path="/films" element={<Navigate replace to="/Movies" />} />
         <Route path="/movies/:id" element={<MovieDetail />} />
@@ -226,6 +227,7 @@ function App() {
         <Route path="/movies/add" element={<AddMovie />} />
         <Route path="/movies/edit/:id" element={<EditMovie />} />
         <Route path="/users" element={<UserList />} />
+        <Route path="/basic-form" element={<BasicForm />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate replace to="/404" />} />
       </Routes>
@@ -236,105 +238,6 @@ function App() {
 
   );
   // JSX Ends
-}
-function EditMovie() {
-
-  const { id } = useParams();
-  const [movie, setMovie] = useState(null)
-
-
-  useEffect(() => {
-
-      async function getMovie() {
-        const data = await  fetch(`${API}/movies/${id}`)
-        const mv = await data.json();
-        setMovie(mv)
-      }
-
-      getMovie()
-
-    },[id]);
-
-  return (
-  <div>
-    {/* <pre>{JSON.stringify(movie, null, 2)}</pre> */}
-    {movie ? <EditMovieForm movie={movie} /> : "Loading"}
-  </div>
-  )
-}
-
-function EditMovieForm({ movie }) {
-
-  const [name, setName] = useState(movie.name);
-  const [poster, setPoster] = useState(movie.poster);
-  const [rating, setRating] = useState(movie.rating);
-  const [summary, setSummary] = useState(movie.summary);
-  const [trailer, setTrailer] = useState(movie.trailer);
-
-  const navigate = useNavigate();
-
-  const addMovie = () => {
-    const updateMovie= {
-      name,
-      poster,
-      rating,
-      summary,
-      trailer
-    };
-    //  console.log(newMovie);
-    // setMovieList([...movieList, newMovie]);
-
-    fetch(`${API}/movies/${movie.id}`, {
-      method: "PUT",
-      body: JSON.stringify(updateMovie),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(() => navigate("/movies"));
-  };
-
-  return(
-    <div className="add-movie-form">
-
-        <TextField
-          onChange={(event) => setName(event.target.value)}
-          type="text" placeholder="" id="outlined-basic"
-          label="Name" variant="outlined" 
-          value= {name}
-          />
-
-        <TextField
-          onChange={(event) => setPoster(event.target.value)}
-          type="text" placeholder=""
-          id="outlined-basic" label="Poster" variant="outlined"
-          value = {poster}
-          />
-        <TextField
-          onChange={(event) => setRating(event.target.value)}
-          type="text" placeholder=""
-          id="outlined-basic" label="Rating" variant="outlined" 
-          value= {rating}
-          />
-        <TextField
-          onChange={(event) => setSummary(event.target.value)}
-          type="text" placeholder=""
-          id="outlined-basic" label="Summary" variant="outlined"
-          value ={summary}
-          />
-        <TextField
-          onChange={(event) => setTrailer(event.target.value)}
-          type="text" placeholder=""
-          id="outlined-basic" label="Trailer" variant="outlined" 
-          value ={trailer}
-          />
-
-
-        {/* <button >
-              Add Movie</button> */}
-        <Button color="success" onClick={addMovie} 
-        variant="outlined">Save Movie</Button>
-      </div>
-  )
 }
 
 function Home() {
